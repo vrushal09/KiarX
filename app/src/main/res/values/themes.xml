@@ -1,0 +1,20 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.KiarX_Test" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/primary</item> -->
+    </style>
+
+    <style name="Theme.KiarX_Test" parent="Base.Theme.KiarX_Test" />
+    
+    <!-- Splash Screen Theme -->
+    <!-- Important: We use a different parent for Splash if possible, or ensure all attrs are valid. 
+         But typically Material3 is fine. 
+         However, let's remove statusBarColor ref if it causes issues on some APIs or make sure it's valid. -->
+    <style name="Theme.App.SplashScreen" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        <!-- Ensure windowNoTitle is true just in case -->
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>
