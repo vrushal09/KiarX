@@ -1,86 +1,81 @@
 # MyToDo App
 
-A simple, clean, and efficient To-Do List Android application developed in Java using the **MVC (Model-View-Controller)** architecture. The app focuses on a user-friendly experience with modern gestures like swiping to manage tasks.
+A robust Android To-Do List application engineered using Java, adhering strictly to the **MVC (Model-View-Controller)** architectural pattern. The application demonstrates clean coding practices, separation of concerns, and efficient local data persistence.
 
-**Developed by:** MehtaVrushal
+**Designed and Developed by:** Mehta Vrushal
 
-## 📱 Features
+---
 
-*   **Task Management**:
-    *   **Add Task**: Create new tasks with a title and optional details.
-    *   **Edit Task**: Swipe **Right** on any task to edit its content.
-    *   **Delete Task**: Swipe **Left** on any task to delete it permanently.
-    *   **Mark as Completed**: Toggle the checkbox to mark a task as done (applies strikethrough styling).
-*   **Organization**:
-    *   **Date Grouping**: Tasks are automatically grouped by date (e.g., "Today", "Wednesday, Oct 25, 2023").
-    *   **Timestamps**: Displays the exact time a task was added or completed.
-*   **Data Persistence**: All tasks are stored locally using **SQLite**, ensuring data is saved even when the app is closed.
-*   **Modern UI/UX**:
-    *   Splash Screen on startup.
-    *   Clean CardView layout for tasks.
-    *   Intuitive Swipe Gestures (Green/Teal for Edit, Red for Delete).
-    *   Edge-to-edge design support.
+## 📥 Download APK
+
+You can download the compiled application package (APK) from the following link:
+👉 [Download Link](https://drive.google.com/file/d/1RIr-j7j_CNXly3Vyk7tej9R4z2nee-QF/view?usp=sharing)
+
+---
+
+## ℹ️ Project Scope & Constraints
+
+Please note that due to strict time constraints, the development focus was primarily placed on:
+1.  **Architectural Integrity**: Implementing a clean MVC structure.
+2.  **Core Logic**: Ensuring robust CRUD operations and data handling.
+3.  **Functional Requirements**: Meeting all specified task management criteria.
+
+As a result, the User Interface (UI) adopts a minimalist design philosophy, prioritizing usability and stability over complex animations or elaborate visual styling.
+
+---
+
+## 📱 Functional Features
+
+*   **Task Creation**: Allows users to input task titles and optional details.
+*   **Gesture-Based Operations**:
+    *   **Edit**: Swipe **Right** on a task item to update its contents.
+    *   **Delete**: Swipe **Left** on a task item to permanently remove it from the database.
+*   **Status Management**: Toggle tasks as completed, applying visual indicators (strikethrough) and updating timestamps.
+*   **Chronological Grouping**: Tasks are dynamically sorted and grouped by date (e.g., "Today", specific dates), providing a structured view of the timeline.
+*   **Local Persistence**: Utilizes **SQLite** for reliable offline storage, ensuring data integrity across app sessions.
 
 ## 🏗️ Architecture: MVC
 
-The application strictly follows the Model-View-Controller pattern to ensure separation of concerns and maintainability.
+The project is structured around the Model-View-Controller pattern to decouple data processing from the user interface.
 
 ### 1. Model (Data Layer)
-Responsible for handling the data logic and database interactions.
-*   **`Task.java`**: POJO class representing a task entity (ID, Title, Details, Completed Status, Timestamps).
-*   **`DatabaseHelper.java`**: Manages SQLite database creation, upgrades, and CRUD operations (`addTask`, `updateTask`, `deleteTask`, `getAllTasks`).
+Encapsulates the application's data and business logic.
+*   **`Task.java`**: POJO (Plain Old Java Object) representing the data entity.
+*   **`DatabaseHelper.java`**: Extends `SQLiteOpenHelper` to manage database creation, version management, and CRUD (Create, Read, Update, Delete) execution.
 
 ### 2. View (UI Layer)
-Responsible for displaying data to the user and capturing interactions.
-*   **Layouts**:
-    *   `activity_main.xml`: Main screen with RecyclerView and Floating Action Button.
-    *   `item_task.xml`: Layout for individual task items (CardView).
-    *   `item_header.xml`: Layout for date headers.
-    *   `dialog_add_edit_task.xml`: Dialog for inputting task details.
-*   **`TaskAdapter.java`**: A custom RecyclerView adapter that:
-    *   Binds data to views.
-    *   Handles view types (Headers vs. Tasks).
-    *   Manages UI updates like strikethrough text for completed tasks.
+Responsible for rendering the user interface and observing user interactions.
+*   **`TaskAdapter.java`**: A custom `RecyclerView.Adapter` that handles view binding, data presentation, and multiple view types (Headers vs. Task Items).
+*   **XML Layouts**: Modularized layout files for activities, list items, and dialogs.
 
 ### 3. Controller (Logic Layer)
-Acts as the bridge between the Model and the View.
-*   **`MainActivity.java`**:
-    *   Initializes the `DatabaseHelper` and `TaskAdapter`.
-    *   Listens for user actions (swipes, clicks).
-    *   Updates the Model (database) based on user input.
-    *   Refreshes the View (adapter) when data changes.
-    *   Handles Swipe Gestures logic using `ItemTouchHelper`.
+Orchestrates the flow of data between the Model and the View.
+*   **`MainActivity.java`**: Acts as the central controller. It initializes dependencies, handles `ItemTouchHelper` callbacks for gestures, manages dialog interactions, and updates the data model based on user input.
 
 ## 📂 Project Structure
 
 ```
 com.example.kiarx_test
-├── DatabaseHelper.java      // SQLite Database Handler (Model)
-├── HeaderItem.java          // Helper for Header rows in RecyclerView
-├── ListItem.java            // Abstract base class for RecyclerView items
-├── MainActivity.java        // Main Controller Activity
-├── SplashActivity.java      // Entry point / Splash Screen
-├── Task.java                // Task Data Model
-├── TaskAdapter.java         // RecyclerView Adapter (View Logic)
-└── TaskItem.java            // Helper for Task rows in RecyclerView
+├── DatabaseHelper.java      // Data Persistence Layer
+├── MainActivity.java        // Primary Controller
+├── SplashActivity.java      // Entry Point
+├── Task.java                // Data Model
+├── TaskAdapter.java         // RecyclerView Adapter
+├── HeaderItem.java          // View Type: Header
+├── TaskItem.java            // View Type: Task
+└── ListItem.java            // Abstract Base for List Items
 ```
 
 ## 🛠️ Tech Stack
 
 *   **Language**: Java
-*   **Minimum SDK**: 24 (Android 7.0)
-*   **Components**:
-    *   `RecyclerView`: For efficient list display.
-    *   `SQLite`: For local data storage.
-    *   `CardView`: For UI elements.
-    *   `ItemTouchHelper`: For implementing swipe gestures.
-
-## 🚀 How to Run
-
-1.  Open the project in **Android Studio**.
-2.  Sync Gradle files to ensure dependencies are downloaded.
-3.  Connect an Android device or start an Emulator.
-4.  Run the application.
+*   **Minimum SDK**: API Level 24 (Android 7.0)
+*   **Architecture**: MVC
+*   **Database**: SQLite
+*   **Key Components**:
+    *   `RecyclerView` (Complex List Handling)
+    *   `CardView` (UI Container)
+    *   `ItemTouchHelper` (Gesture Recognition)
 
 ---
-*Created for KiarX Test Assessment.*
+*Submitted for KiarX Test Assessment.*
